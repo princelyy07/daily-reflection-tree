@@ -1,0 +1,261 @@
+{
+  "nodes": [
+
+    {
+      "id": "START",
+      "type": "start",
+      "text": "Good evening. Let's reflect on your day.",
+      "next": "A1_Q0"
+    },
+
+    {
+      "id": "A1_Q0",
+      "type": "question",
+      "text": "When something didn’t go as planned today, what was your first thought?",
+      "options": [
+        "What could I do differently?",
+        "Why does this always happen?",
+        "I'll deal with it later",
+        "Let me try another approach"
+      ],
+      "next": "A1_Q1"
+    },
+
+    {
+      "id": "A1_Q1",
+      "type": "question",
+      "text": "How would you describe your day overall?",
+      "options": ["Productive", "Stressful", "Mixed", "Frustrating"],
+      "next": "A1_D1"
+    },
+
+    {
+      "id": "A1_D1",
+      "type": "decision",
+      "logic": {
+        "Productive": "A1_Q2_HIGH",
+        "Mixed": "A1_Q2_HIGH",
+        "Stressful": "A1_Q2_LOW",
+        "Frustrating": "A1_Q2_LOW"
+      }
+    },
+
+    {
+      "id": "A1_Q2_HIGH",
+      "type": "question",
+      "text": "When things went well, what made it happen?",
+      "options": [
+        "I prepared in advance",
+        "I adapted quickly",
+        "The team supported me",
+        "Things worked out without much input from me"
+      ],
+      "signal": "axis1:internal",
+      "next": "A1_Q3_HIGH"
+    },
+
+    {
+      "id": "A1_Q3_HIGH",
+      "type": "question",
+      "text": "What role did you personally play in that success?",
+      "options": [
+        "I planned it carefully",
+        "I made quick adjustments",
+        "I supported others effectively",
+        "I was just part of the flow"
+      ],
+      "signal": "axis1:internal",
+      "next": "A1_R_INT"
+    },
+
+    {
+      "id": "A1_Q2_LOW",
+      "type": "question",
+      "text": "When things got difficult, what was your first instinct?",
+      "options": [
+        "Figure out what I could control",
+        "Wait for someone else to fix it",
+        "Feel stuck",
+        "Push through without a plan"
+      ],
+      "signal": "axis1:external",
+      "next": "A1_Q3_LOW"
+    },
+
+    {
+      "id": "A1_Q3_LOW",
+      "type": "question",
+      "text": "Looking back, where did you still have some choice?",
+      "options": [
+        "In how I responded",
+        "In asking for help",
+        "In adjusting my approach",
+        "I didn’t think I had any choice"
+      ],
+      "signal": "axis1:external",
+      "next": "A1_R_EXT"
+    },
+
+    {
+      "id": "A1_R_INT",
+      "type": "reflection",
+      "text": "You noticed your role in how things turned out. That awareness is where real control begins.",
+      "next": "BRIDGE_1_2"
+    },
+
+    {
+      "id": "A1_R_EXT",
+      "type": "reflection",
+      "text": "It’s natural to focus on what went wrong around you. But even in those moments, there were choices — small ones that shaped your day.",
+      "next": "BRIDGE_1_2"
+    },
+
+    {
+      "id": "BRIDGE_1_2",
+      "type": "bridge",
+      "text": "Now let's shift from how you handled your day to what you contributed.",
+      "next": "A2_Q1"
+    },
+
+    {
+      "id": "A2_Q1",
+      "type": "question",
+      "text": "Which moment stands out most from today?",
+      "options": [
+        "I helped someone with their work",
+        "I focused only on my assigned tasks",
+        "I felt I deserved more recognition",
+        "I supported the team beyond my role"
+      ],
+      "next": "A2_Q2"
+    },
+
+    {
+      "id": "A2_Q2",
+      "type": "question",
+      "text": "In that moment, what mattered more to you?",
+      "options": [
+        "Helping others succeed",
+        "Finishing my own work",
+        "Getting recognition",
+        "Doing what was required"
+      ],
+      "next": "A2_D1"
+    },
+
+    {
+      "id": "A2_D1",
+      "type": "decision",
+      "logic": {
+        "Helping others succeed": "A2_R_CONTRIB",
+        "I supported the team beyond my role": "A2_R_CONTRIB",
+        "Finishing my own work": "A2_R_NEUTRAL",
+        "Doing what was required": "A2_R_NEUTRAL",
+        "Getting recognition": "A2_R_ENTITLE",
+        "I felt I deserved more recognition": "A2_R_ENTITLE"
+      }
+    },
+
+    {
+      "id": "A2_R_CONTRIB",
+      "type": "reflection",
+      "text": "You focused on what you could give today. Contribution builds value beyond immediate results.",
+      "signal": "axis2:contribution",
+      "next": "BRIDGE_2_3"
+    },
+
+    {
+      "id": "A2_R_NEUTRAL",
+      "type": "reflection",
+      "text": "You handled your responsibilities well. There may be opportunities to extend your impact further.",
+      "signal": "axis2:neutral",
+      "next": "BRIDGE_2_3"
+    },
+
+    {
+      "id": "A2_R_ENTITLE",
+      "type": "reflection",
+      "text": "It’s natural to want recognition. But shifting focus toward contribution often creates more meaningful outcomes.",
+      "signal": "axis2:entitlement",
+      "next": "BRIDGE_2_3"
+    },
+
+    {
+      "id": "BRIDGE_2_3",
+      "type": "bridge",
+      "text": "Now let's look beyond yourself — and consider the bigger picture.",
+      "next": "A3_Q1"
+    },
+
+    {
+      "id": "A3_Q1",
+      "type": "question",
+      "text": "When thinking about your day, what mattered most?",
+      "options": [
+        "My tasks and performance",
+        "My stress and workload",
+        "Team outcomes",
+        "Impact on others or customers"
+      ],
+      "next": "A3_Q2"
+    },
+
+    {
+      "id": "A3_Q2",
+      "type": "question",
+      "text": "Who was most affected by your actions today?",
+      "options": [
+        "Mostly me",
+        "Me and my team",
+        "A specific colleague",
+        "Customers or end users"
+      ],
+      "next": "A3_D1"
+    },
+
+    {
+      "id": "A3_D1",
+      "type": "decision",
+      "logic": {
+        "My tasks and performance": "A3_R_SELF",
+        "My stress and workload": "A3_R_SELF",
+        "Mostly me": "A3_R_SELF",
+        "Team outcomes": "A3_R_TEAM",
+        "Impact on others or customers": "A3_R_TEAM",
+        "Me and my team": "A3_R_TEAM",
+        "A specific colleague": "A3_R_TEAM",
+        "Customers or end users": "A3_R_TEAM"
+      }
+    },
+
+    {
+      "id": "A3_R_SELF",
+      "type": "reflection",
+      "text": "Your focus stayed close to your own experience today. Expanding your perspective can often reduce pressure and increase meaning.",
+      "signal": "axis3:self",
+      "next": "SUMMARY"
+    },
+
+    {
+      "id": "A3_R_TEAM",
+      "type": "reflection",
+      "text": "You considered the broader impact of your work. This outward focus often brings deeper purpose and connection.",
+      "signal": "axis3:others",
+      "next": "SUMMARY"
+    },
+
+    {
+      "id": "SUMMARY",
+      "type": "summary",
+      "text": "Today’s reflection shows how you approached your day — in your control, your contribution, and your perspective. Noticing these patterns is the first step toward changing them.",
+      "next": "END"
+    },
+
+    {
+      "id": "END",
+      "type": "end",
+      "text": "Good job reflecting today. See you tomorrow."
+    }
+
+  ]
+}
